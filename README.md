@@ -8,4 +8,5 @@ Set up:
 - download this repository 
 - install OpenSCAD
 - dowload NopSCADlib into NopSCADlib directory
-- run OpenSCAD, open main.scad
+- run OpenSCAD
+- open main.scad
