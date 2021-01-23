@@ -5,7 +5,7 @@ Dependencies:
 - https://github.com/nophead/NopSCADlib
 
 Set up:
-- download this repository 
+- download this repository
 - install OpenSCAD
 - dowload NopSCADlib into NopSCADlib directory
 - run OpenSCAD
