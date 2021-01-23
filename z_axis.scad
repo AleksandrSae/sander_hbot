@@ -49,16 +49,12 @@ module p08_bearing_holder() {
 }
 
 module z_axis() {
-    translate([0,0,p08_z_axis_level - 9]) rotate([0,0,180]) kp_pillow_block(KP08_15);
+    translate([0,0,p08_z_axis_level - 4.5]) rotate([0,0,180]) kp_pillow_block(KP08_15);
     // leadscrew
     translate([0,0, z_axis_leadscrew_level]) color("green") cylinder(d=8, Z_AXIS_LEADSCREW_LEN);
 
-    translate([-kp08_bh_w/2, 15, p08_z_axis_level - 16.5]) p08_bearing_holder();
+    translate([-kp08_bh_w/2, 15, p08_z_axis_level - 12]) p08_bearing_holder();
 
     rotate([0,0,-90]) NEMA(NEMA17);
     translate([0,0,10]) %cylinder(d=20, 30);
-
 }
-
-
-p08_bearing_holder();
