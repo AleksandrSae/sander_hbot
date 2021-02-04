@@ -5,6 +5,13 @@ include <./common_parts/mgn12.scad>
 include <./constants.scad>
 include <./NopSCADlib/vitamins/pulleys.scad>
 include <./NopSCADlib/vitamins/pulley.scad>
+include <./natjazhitel.scad>
+
+GT2x10 = ["GT", 2.0,  10, 1.38, 0.75, 0.254];
+GT2x16x10_pulley        = ["GT2x16_pulley",        "GT2",   16,  9.75, GT2x10,  10.0,  13, 5,   5, 13.0, 1.0,4.5,3.0,  M3_grub_screw, 2];
+GT2x20x10_toothed_idler = ["GT2x20_toothed_idler", "GT2",   20, 12.22, GT2x10,  10,  18, 0,   4, 18.0, 1.0, 0, 0,    false,         0];
+GT2x16x10_plain_idler   = ["GT2x16_plain_idler",   "GT2",    0,  9.63, GT2x10,  10,  13, 0,   3, 13.0, 1.0, 0, 0,    false,         0];
+nema17_move_y = 30;
 
 module rods(x, len, dia) {
     for (i=[0,1])
@@ -20,6 +27,18 @@ module sh10a_holders(x,y) {
                     sh10a_holder();
 }
 
+module nema_motor_with_pulley() {
+    NEMA(NEMA17);
+    translate([0,0,4]) pulley(GT2x16x10_pulley);
+}
+
+module pulley_on_frame() {
+
+    translate([FRAME_WIDTH-15,nema17_move_y + 21,9]) pulley(GT2x20x10_toothed_idler);
+    translate([FRAME_WIDTH-15,FRAME_LENGTH - nema17_move_y - 21 ,9]) pulley(GT2x20x10_toothed_idler);
+
+}
+
 module rods_and_holders() {
     translate([15,21,0]) sh10a_holders(FRAME_LENGTH + 60, FRAME_LENGTH - 42);
     dia = 9.8;
@@ -30,19 +49,53 @@ module rods_and_holders() {
     }
 }
 
+module y_axis() {
+    translate([FRAME_WIDTH/2, FRAME_LENGTH/2 - MGN_12_RAIL_LEN/2, 0]) {
+        rail_z_pos = 8;
+        x_center = 6; // MGN12 / 2
+        y_pulley_width = 30;
+        y_pulley_depth = 28;
+        translate([0,0,rail_z_pos]) rotate([0,0,90]) rotate([180,0,0]) MGN12_rail(MGN_12_RAIL_LEN);
+        for (i=[0,1]) {
+            for (j=[0,1]) {
+                translate([i*y_pulley_width + x_center - y_pulley_width/2, y_pulley_depth + j*(MGN_12_RAIL_LEN - 2*y_pulley_depth), 9]) pulley(GT2x16x10_plain_idler);
+            }
+        }
+    }
+    translate([FRAME_WIDTH/2 - 29, 21, 20]) {
+        rotate([0,90,0])
+            difference() {
+                cylinder(h = 70, d = 14);
+                translate([0,0,-0.5]) cylinder(h = 71, d = 12);
+            }
+    }
+    translate([FRAME_WIDTH/2 - 29, 21 + FRAME_LENGTH-42, 20]) {
+        rotate([0,90,0])
+            difference() {
+                cylinder(h = 70, d = 14);
+                translate([0,0,-0.5]) cylinder(h = 71, d = 12);
+            }
+    }
+    translate([FRAME_WIDTH/2 - 29, 21-7, 0]) {
+        %cube([70, 60, 27]);
+    }
+}
+
 module xy_axis() {
     rods_and_holders();
-    translate([FRAME_WIDTH/2 ,FRAME_LENGTH/2 -  MGN_12_RAIL_LEN/2,0])
-    rotate([0,0,90]) rotate([180,0,0]) MGN12_rail(MGN_12_RAIL_LEN);
 
-    nema17_move_y = 30;
-    translate([-21-5,21 + nema17_move_y,0]) NEMA(NEMA17);
-    translate([-21-5,FRAME_LENGTH - 21 - nema17_move_y,0]) rotate([0,0,180]) NEMA(NEMA17);
+//    translate([-150,0,0])
+    y_axis();
 
-    GT2x10 = ["GT", 2.0,  10, 1.38, 0.75, 0.254];
-    GT2x16x10_pulley        = ["GT2x16_pulley",        "GT2",   16,  9.75, GT2x10,  7.0,  13, 5,   5, 13.0, 1.0,4.5,3.0,  M3_grub_screw, 2];
-
-    translate([-26,nema17_move_y+21,5])
-    pulley(GT2x16x10_pulley, colour = silver);
+    translate([-21-5,21 + nema17_move_y,0]) nema_motor_with_pulley();
+    translate([-21-5,FRAME_LENGTH - 21 - nema17_move_y,0]) rotate([0,0,180]) nema_motor_with_pulley();
+    pulley_on_frame();
+    color("lightblue") {
+        for (j = [0,1]) {
+            translate([FRAME_WIDTH - 100,30+j*(FRAME_LENGTH-60),-15]) rotate([-90+180*j,0,0]) natjazhitel();
+        }
+        translate([30,55,-15]) rotate([-90,0,-90]) corner_natjazhitel();
+        translate([55,FRAME_LENGTH-30,-15]) rotate([90,180,0]) corner_natjazhitel();
+    }
 }
 
