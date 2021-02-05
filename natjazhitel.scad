@@ -51,13 +51,17 @@ module stenka() {
 
 module natjazhitel() {
     translate([1,-10,0]) {
-        podlozhka();
+        color("lightblue") {
+            podlozhka();
 
-        translate([15,2,0]) {
-            translate([0,3-0.5,0]) rotate([90,0,0]) stenka();
-            translate([0,9,0]) rotate([90,0,0]) stenka();
-            //translate([0,15+0.5,0]) rotate([90,0,0]) stenka();
+            translate([15,2,0]) {
+                translate([0,3-0.5,0]) rotate([90,0,0]) stenka();
+                translate([0,9,0]) rotate([90,0,0]) stenka();
+            }
         }
+
+        translate([15,0,10])
+            translate([0,6.75,0]) rotate([90,0,0]) bearing();
     }
 }
 
@@ -117,20 +121,43 @@ module stenka2() {
     translate([8,4,-2]) rotate([90,0,-90]) napliv(r=2,l=stenka_d);
     translate([6,2,-2]) rotate([0,-90,-90]) napliv(r=2, l=stenka_d);
     translate([6,18,4]) rotate([0,90,-90]) napliv(r=2, l=stenka_d);
-    
+
 }
 
 
 module corner_natjazhitel() {
     translate([corner_len,-corner_wide/2,0]) {
-        podlozhka2();
+        color("lightblue") {
+            podlozhka2();
 
-        translate([-10,corner_thinkness,0]) {
-            translate([0,3-0.5,0]) rotate([90,0,0]) stenka2();
-            translate([0,9,0]) rotate([90,0,0]) stenka2();
-            translate([0,15+0.5,0]) rotate([90,0,0]) stenka2();
+            color("lightblue")
+            translate([-10,corner_thinkness,0]) {
+                translate([0,3-0.5,0]) rotate([90,0,0]) stenka2();
+                translate([0,9,0]) rotate([90,0,0]) stenka2();
+                translate([0,15+0.5,0]) rotate([90,0,0]) stenka2();
+            }
+        }
+        translate([-10,0,10]) {
+            translate([0,6.75,0]) rotate([90,0,0]) bearing();
+            translate([0,13.25,0]) rotate([90,0,0]) bearing();
         }
     }
+}
+
+module bearing() {
+    /* difference() {
+        rotate_extrude(convexity = 10, $fn = 10)
+            translate([1.5,-2,0])
+            color("red") square([4.5, 4]);
+
+        rotate_extrude(convexity = 10, $fn = 10)
+            translate([7.3, 0, 0])
+            circle(r = 2, $fn = 100);
+    } */
+    color("silver")
+        rotate_extrude($fn=50)
+            translate([1.5,-2,0])
+                polygon( points=[[0,0],[4.5,0],[4.5,0.7],[4,2],[4.5,3.3],[4.5,4],[0,4]] );
 }
 
 //corner_natjazhitel();
