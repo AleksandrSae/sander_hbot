@@ -37,7 +37,7 @@ module frame() {
                 square_tube_15x30(SQUARE_TUBE_15x30x360, center=false);
 
     // 4
-    translate([30,FRAME_LENGTH-15,z_motor_balk_level-15])
+    translate([30,FRAME_LENGTH-15,z_motor_balk_pos.z-15])
         rotate([90,0,0])
             rotate([0,90,0])
                 extrusion_profile_30x30(PROFILE_450);
@@ -69,18 +69,18 @@ module frame() {
             rotate([0,90,0])
                 extrusion_profile_30x30(PROFILE_450);
 
-    // 10 
+    // 10
     translate([30,FRAME_LENGTH-15,FRAME_HIGHT-15])
         rotate([90,0,0])
             rotate([0,90,0])
                 extrusion_profile_30x30(PROFILE_450);
 
-    // 11 
+    // 11
     translate([15,0,FRAME_HIGHT-15])
             rotate([-90,0,0])
                 extrusion_profile_30x30(PROFILE_420);
 
-    // 12 
+    // 12
     translate([FRAME_WIDTH-15,0,FRAME_HIGHT-15])
             rotate([-90,0,0])
                 extrusion_profile_30x30(PROFILE_420);

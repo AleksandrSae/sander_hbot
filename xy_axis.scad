@@ -92,7 +92,7 @@ module belts(params) {
             translate([i*y_pulley_width + x_center - y_pulley_width/2, y_pulley_depth + j*(MGN_12_RAIL_LEN - 2*y_pulley_depth), 9]) pulley(GT2x16x10_plain_idler);
         }
     }*/
-   
+
 
     motor1_pos = params[0];
     motor2_pos = params[1];

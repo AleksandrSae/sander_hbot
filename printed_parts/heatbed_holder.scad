@@ -1,5 +1,5 @@
-include <./constants.scad>
-include <./vars.scad>
+include <../constants.scad>
+include <../vars.scad>
 
 module heatbed_holder() {
 
