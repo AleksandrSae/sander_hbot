@@ -15,7 +15,7 @@ z_axis_leadscrew_pos = [0, 0, 25];
 p08_z_axis_level = FRAME_HIGHT - z_motor_balk_pos.z - 36 /* profile 30x30 size */;
 
 xy_axis_pos = [0,0,FRAME_HIGHT];
-y_axis_pos = [FRAME_WIDTH/2 - 100, 0, 0];
+y_axis_pos = [FRAME_WIDTH/2, 0, 0];
 
 xy_motors_y_offset = 51;
 xy_motor1_pos = [-25, xy_motors_y_offset, 0];
@@ -27,8 +27,8 @@ pulley_on_frame_2_pos = [FRAME_WIDTH - 15, xy_motor2_pos.y, 9];
 pulley_on_motor1_pos = xy_motor1_pos;
 pulley_on_motor2_pos = xy_motor2_pos;
 
-pulley_x_offset1 = 20;
-pulley_x_offset2 = 20;
+pulley_x_offset1 = 15;
+pulley_x_offset2 = 15;
 
 pulley_16_offset = pulley_pr(GT2x16x10_pulley);
 pulley_20_offset = pulley_pr(GT2x20x10_plain_idler);

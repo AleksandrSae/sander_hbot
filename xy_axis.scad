@@ -110,8 +110,19 @@ module natjazhiteli() {
     for (j = [0,1]) {
         translate([FRAME_WIDTH - 100,30+j*(FRAME_LENGTH-60),-15]) rotate([-90+180*j,0,0]) natjazhitel();
     }
-    translate([30,55,-15]) rotate([-90,0,-90]) corner_natjazhitel();
-    translate([55,FRAME_LENGTH-30,-15]) rotate([90,180,0]) corner_natjazhitel();
+    translate([30, 55, -15]) rotate([-90,0,-90]) corner_natjazhitel();
+    translate([55, FRAME_LENGTH-30, -15]) rotate([90,180,0]) corner_natjazhitel();
+
+    translate([34, 34, -11.75]) rotate([-90, 0,0]) color("blue") cylinder(FRAME_LENGTH - 67, r=0.7);
+    translate([34, 34, -18.25]) rotate([-90, 0,0]) color("blue") cylinder(FRAME_LENGTH - 67, r=0.7);
+
+    translate([35, 34, -11.75]) rotate([0,90,0]) color("blue") cylinder(390, r=0.7);
+    translate([y_axis_pos.x, 46, -11.75]) rotate([0,90,0]) color("blue") cylinder(FRAME_WIDTH - y_axis_pos.x - 80, r=0.7);
+    translate([35, 34, -18.25]) rotate([0,90,0]) color("blue") cylinder(y_axis_pos.x - 35, r=0.7);
+
+    translate([35, FRAME_LENGTH - 34, - 18.25]) rotate([0,90,0]) color("blue") cylinder(390, r=0.7);
+    translate([y_axis_pos.x, FRAME_LENGTH - 46, - 18.25]) rotate([0,90,0]) color("blue") cylinder(FRAME_WIDTH - y_axis_pos.x - 80, r=0.7);
+    translate([35, FRAME_LENGTH - 34, - 11.75]) rotate([0,90,0]) color("blue") cylinder(y_axis_pos.x - 35, r=0.7);
 }
 
 module xy_axis() {
@@ -123,8 +134,8 @@ module xy_axis() {
     pulley_on_frame();
     pulley_on_y_axis();
     belts();
-    y_axis();
     natjazhiteli();
+    // y_axis();
 }
 
 translate (xy_axis_pos) xy_axis();
