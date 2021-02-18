@@ -8,7 +8,7 @@ include <./NopSCADlib/vitamins/pulleys.scad>
 include <./NopSCADlib/vitamins/pulley.scad>
 include <./NopSCADlib/vitamins/stepper_motors.scad>
 include <./printed_parts/natjazhitel.scad>
-include <./y_axis.scad>
+use <./y_axis.scad>
 
 module rods(x, distance, dia) {
     for (i=[0,1])
@@ -21,7 +21,7 @@ module sh10a_holders(x,y) {
         for (j=[0,1])
             translate([x*i,y*j,0])
                 rotate([0,0,90])
-                    sh10a_holder();
+                    color("silver") sh10a_holder();
 }
 
 module nema_motor_with_pulley() {

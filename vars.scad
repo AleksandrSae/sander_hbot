@@ -15,7 +15,7 @@ z_axis_leadscrew_pos = [0, 0, 25];
 p08_z_axis_level = FRAME_HIGHT - z_motor_balk_pos.z - 36 /* profile 30x30 size */;
 
 xy_axis_pos = [0,0,FRAME_HIGHT];
-y_axis_pos = [FRAME_WIDTH/2, 0, 0];
+y_axis_pos = [FRAME_WIDTH/2 - 100, 0, 0];
 
 xy_motors_y_offset = 51;
 xy_motor1_pos = [-25, xy_motors_y_offset, 0];
@@ -30,16 +30,18 @@ pulley_on_motor2_pos = xy_motor2_pos;
 pulley_x_offset1 = 15;
 pulley_x_offset2 = 15;
 
+pulley_y_offset = 5;
+
 pulley_16_offset = pulley_pr(GT2x16x10_pulley);
 pulley_20_offset = pulley_pr(GT2x20x10_plain_idler);
 
-pulley_00_pos = [y_axis_pos.x - pulley_x_offset1, pulley_on_frame_1_pos.y + pulley_16_offset + pulley_20_offset, 9];
-pulley_10_pos = [y_axis_pos.x + pulley_x_offset1, pulley_on_frame_1_pos.y + 2*pulley_20_offset, 9];
-pulley_01_pos = [y_axis_pos.x - pulley_x_offset2, pulley_on_frame_2_pos.y - pulley_16_offset - pulley_20_offset, 9];
-pulley_11_pos = [y_axis_pos.x + pulley_x_offset2, pulley_on_frame_2_pos.y - 2*pulley_20_offset, 9];
+pulley_00_pos = [y_axis_pos.x - pulley_x_offset1, pulley_on_frame_1_pos.y - pulley_y_offset + pulley_16_offset + pulley_20_offset, 9];
+pulley_10_pos = [y_axis_pos.x + pulley_x_offset1, pulley_on_frame_1_pos.y - pulley_y_offset + 2*pulley_20_offset, 9];
+pulley_01_pos = [y_axis_pos.x - pulley_x_offset2, pulley_on_frame_2_pos.y + pulley_y_offset - pulley_16_offset - pulley_20_offset, 9];
+pulley_11_pos = [y_axis_pos.x + pulley_x_offset2, pulley_on_frame_2_pos.y + pulley_y_offset - 2*pulley_20_offset, 9];
 
 y_axis_rail_pos = [-6, FRAME_LENGTH/2 - MGN_12_RAIL_LEN/2, 4];
-y_axis_bearing1_pos = [y_axis_pos.x, 21, 20];
-y_axis_bearing2_pos = [y_axis_pos.x, FRAME_LENGTH - 21, 20];
+y_axis_bearing1_pos = [0 /* y_axis_pos.x */, 21, 20];
+y_axis_bearing2_pos = [0 /* y_axis_pos.x */, FRAME_LENGTH - 21, 20];
 
 y_axis_mount1_pos = [y_axis_pos.x, 0, 0];
