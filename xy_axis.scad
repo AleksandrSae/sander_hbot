@@ -8,6 +8,7 @@ include <./NopSCADlib/vitamins/pulleys.scad>
 include <./NopSCADlib/vitamins/pulley.scad>
 include <./NopSCADlib/vitamins/stepper_motors.scad>
 include <./printed_parts/natjazhitel.scad>
+include <./y_axis.scad>
 
 module rods(x, distance, dia) {
     for (i=[0,1])
@@ -49,36 +50,6 @@ module rods_and_holders() {
         rotate([0,90,0]) cylinder(FRAME_WIDTH-16, dia/2, dia/2);
         translate([0,FRAME_LENGTH-42,0])
             rotate([0,90,0]) cylinder(FRAME_WIDTH-16, dia/2, dia/2);
-    }
-}
-
-module y_axis() {
-    translate([FRAME_WIDTH/2, FRAME_LENGTH/2 - MGN_12_RAIL_LEN/2, 0]) {
-        rail_z_pos = 8;
-        x_center = 6; // MGN12 / 2
-        y_pulley_width = 30;
-        y_pulley_depth = 28;
-        translate([0,0,rail_z_pos]) rotate([0,0,90]) rotate([180,0,0]) MGN12_rail(MGN_12_RAIL_LEN);
-    }
-    translate([FRAME_WIDTH/2 - 29, 21, 20]) {
-        rotate([0,90,0])
-            difference() {
-                cylinder(h = 70, d = 14);
-                translate([0,0,-0.5]) cylinder(h = 71, d = 12);
-            }
-    }
-    translate([FRAME_WIDTH/2 - 29, 21 + FRAME_LENGTH-42, 20]) {
-        rotate([0,90,0])
-            difference() {
-                cylinder(h = 70, d = 14);
-                translate([0,0,-0.5]) cylinder(h = 71, d = 12);
-            }
-    }
-    translate([FRAME_WIDTH/2 - 29, 21-7, 0]) {
-        %cube([70, 60, 27]);
-    }
-    translate([FRAME_WIDTH/2 - 29, 30, -30]) {
-        %cube([70, 44, 30]);
     }
 }
 
@@ -135,7 +106,7 @@ module xy_axis() {
     pulley_on_y_axis();
     belts();
     natjazhiteli();
-    // y_axis();
+    translate(y_axis_pos) y_axis();
 }
 
 translate (xy_axis_pos) xy_axis();
